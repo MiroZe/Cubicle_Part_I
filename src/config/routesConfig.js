@@ -5,7 +5,7 @@ const homeController = require('../controllers/homeController')
 
 
 
-const routes = (app) => {
+const routesConfig = (app) => {
 
     app.use('/', homeController)
     app.use('/cube', cubeController)
@@ -16,4 +16,4 @@ const routes = (app) => {
 }
 
 
-module.exports = routes
+module.exports = routesConfig
