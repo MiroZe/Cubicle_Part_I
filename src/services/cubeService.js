@@ -6,11 +6,26 @@ const filePath = path.resolve(__dirname, '..', 'data', 'db.json')
 
 
 
-async function getAllCubes() {
+async function getAllCubes(queries) {
 
     try {
         const result = await fs.readFile(filePath, 'utf-8')
-        return JSON.parse(result)
+        let cubes =  JSON.parse(result.slice())
+        if(queries.search) {
+           
+            cubes = cubes.filter(c => c.name.toLowerCase().includes(queries.search.toLowerCase()))
+        }
+
+        if(queries.from) {
+           
+            cubes = cubes.filter(c => c.difficultyLevel >= queries.from)
+        }
+        if(queries.to) {
+           
+            cubes = cubes.filter(c => c.difficultyLevel <= queries.to)
+        }
+
+        return cubes
 
     } catch (error) {
         console.log(error)
