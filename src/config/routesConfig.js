@@ -1,3 +1,4 @@
+const cubeController = require('../controllers/cubeConreoller')
 const homeController = require('../controllers/homeController')
 
 
@@ -6,7 +7,12 @@ const homeController = require('../controllers/homeController')
 
 const routes = (app) => {
 
-    app.get('/', homeController)
+    app.use('/', homeController)
+    app.use('/cube', cubeController)
+    app.get('*', (req,res) => {
+        res.redirect('/404')
+    })
+  
 }
 
 
