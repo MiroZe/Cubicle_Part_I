@@ -1,9 +1,13 @@
+const { getAllCubes } = require('../services/cubeService');
+
 const homeController = require('express').Router();
 
 
 
-homeController.get('/', (req,res) => {
-
+homeController.get('/', async (req,res) => {
+    const result =  await getAllCubes()
+    
+    
     res.render('home')
 })
 
