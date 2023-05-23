@@ -1,7 +1,7 @@
 const cubeController = require('express').Router();
 const uniqId = require('uniqid')
 
-const { getAllCubes, saveCubes } = require('../services/cubeService');
+const { getAllCubes, saveCubes, getOneCube } = require('../services/cubeService');
 
 
 
@@ -27,9 +27,18 @@ cubeController.post('/create', async (req,res) => {
    
     result.push(newCube);
     
-    await saveCubes(JSON.stringify(result))
+    await saveCubes(JSON.stringify(result,null, 2))
     
     res.redirect('/')
+})
+
+cubeController.get('/:cubeId/details', async (req,res) => {
+
+    const cube = await getOneCube(req.params.cubeId)
+   
+    
+    res.render('details', {cube})
+
 })
 
 
